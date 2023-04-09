@@ -1,17 +1,16 @@
 using System;
 using UnityEngine;
 using UnityEngine.WSA;
+using Application = UnityEngine.Application;
 
 public class BallLauncher: MonoBehaviour
 {
     [SerializeField] private float _launchSpeed = 1f;
     [SerializeField] private Rigidbody2D _ball;
-    private IAimInputProvider _inputProvider;
+    [SerializeField] private AimInputProviderBase _inputProvider;
 
     private void Start()
     {
-        _inputProvider = new AimInputProvider();
-        
         _inputProvider.OnLaunch += Launch;
 
         _ball.transform.parent = transform;
@@ -28,8 +27,17 @@ public class BallLauncher: MonoBehaviour
         _ball.AddForce(shootDirection, ForceMode2D.Impulse);
     }
 
-    private void Update()
+    private void OnDrawGizmos()
     {
-        _inputProvider.OnUpdate();
+        if (!Application.isPlaying) return;
+        
+        Gizmos.color = Color.red;
+
+        var initialPos = transform.position;
+        
+        var targetPos = _inputProvider.GetAimTarget();
+        
+        Gizmos.DrawLine(initialPos, targetPos);
+        
     }
 }

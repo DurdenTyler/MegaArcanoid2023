@@ -1,19 +1,19 @@
 using System;
 using UnityEngine;
 
-public class AimInputProvider: IAimInputProvider
+public class AimInputProvider: AimInputProviderBase
 {
-    public event Action OnLaunch;
+    public override event Action OnLaunch;
     
     private Vector3 _aimTarget;
     
-    public void OnUpdate()
+    public void Update()
     {
         ProccessLaunchInput();
         ProccesAimInput();
     }
 
-    public Vector2 GetAimTarget()
+    public override Vector2 GetAimTarget()
     {
         return _aimTarget;
     }
@@ -21,6 +21,7 @@ public class AimInputProvider: IAimInputProvider
     private void ProccesAimInput()
     {
         _aimTarget = Input.mousePosition;
+        _aimTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
     
     private void ProccessLaunchInput()
