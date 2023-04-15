@@ -3,21 +3,11 @@ using UnityEngine;
 
 public class PlayerMoveController: MonoBehaviour
 {
-    private IInputProvider _inputProvider;
+    [SerializeField] private InputProviderBase _inputProvider;
 
     [SerializeField] private float _speed = 1f;
 
     [SerializeField] private float _levelBorderX;
-
-    private void Awake()
-    {
-        _inputProvider = new InputController();
-    }
-
-    private void Update()
-    {
-        _inputProvider.OnUpdate();
-    }
 
     private void FixedUpdate()
     {

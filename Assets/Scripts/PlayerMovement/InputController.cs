@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public class InputController : IInputProvider
+public class InputController : InputProviderBase
 {
     private float _horizontalInput;
 
-    public void OnUpdate()
+    private void Update()
     {
         _horizontalInput = Input.GetAxis("Horizontal");
     }
 
-    public float GetCurrentInput()
+    public override float GetCurrentInput()
     {
         return _horizontalInput;
     }

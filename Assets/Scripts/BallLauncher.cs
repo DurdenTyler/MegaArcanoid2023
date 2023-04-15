@@ -5,6 +5,8 @@ using Application = UnityEngine.Application;
 
 public class BallLauncher: MonoBehaviour
 {
+    public event Action OnLaunched;
+    
     [SerializeField] private float _launchSpeed = 1f;
     [SerializeField] private Rigidbody2D _ball;
     [SerializeField] private AimInputProviderBase _inputProvider;
@@ -25,6 +27,7 @@ public class BallLauncher: MonoBehaviour
         shootDirection *= _launchSpeed;
         _ball.transform.parent = null;
         _ball.AddForce(shootDirection, ForceMode2D.Impulse);
+        OnLaunched?.Invoke();
     }
 
     private void OnDrawGizmos()
