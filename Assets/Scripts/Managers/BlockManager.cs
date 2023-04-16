@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class BlockManager: MonoBehaviour
 {
+    [SerializeField] private GameStateManager _gameStateManager;
+    
     [SerializeField] private int _damagePerHit = 1;
     
     public HashSet<Block> _blocks = new HashSet<Block>();
@@ -24,7 +26,7 @@ public class BlockManager: MonoBehaviour
         
         if (_blocks.Count == 0)
         {
-            print("Ты выйграл!");
+            _gameStateManager.Win();
         }
     }
 }

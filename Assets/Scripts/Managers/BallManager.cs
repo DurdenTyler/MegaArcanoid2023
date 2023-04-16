@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BallsManager: MonoBehaviour
+public class BallManager: MonoBehaviour
 {
     public HashSet<Ball> _balls = new HashSet<Ball>();
 
+    [SerializeField] private GameStateManager _gameStateManager;
+ 
     private void Awake()
     {
         _balls = FindObjectsOfType<Ball>().ToHashSet();
@@ -19,7 +21,7 @@ public class BallsManager: MonoBehaviour
 
         if (_balls.Count == 0)
         {
-            print("Игра окончена!");
+            _gameStateManager.Lose();
         }
     }
 }
