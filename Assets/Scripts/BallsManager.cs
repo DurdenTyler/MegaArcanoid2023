@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class BallsManager: MonoBehaviour
 {
-    private List<Ball> _balls = new List<Ball>();
+    public HashSet<Ball> _balls = new HashSet<Ball>();
 
     private void Awake()
     {
-        _balls = FindObjectsOfType<Ball>().ToList();
+        _balls = FindObjectsOfType<Ball>().ToHashSet();
     }
 
     public void DestroyBall(Ball ball)
