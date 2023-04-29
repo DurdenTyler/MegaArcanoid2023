@@ -4,22 +4,25 @@ using UnityEngine;
 public class LaserPointerView: MonoBehaviour
 {
     [SerializeField] private AimInputProviderBase _aimInputProvider;
+    [SerializeField] private BallLauncher _ballLauncher;
+
+    private void Awake()
+    {
+        _ballLauncher.OnLaunched += Hide;
+    }
+
+    private void Hide()
+    {
+        _ballLauncher.OnLaunched -= Hide;
+        Destroy(gameObject);
+    }
 
     private void Update()
     {
         Vector3 targetPoint = _aimInputProvider.GetAimTarget();
 
-        Vector3 startPoint = transform.position;
+        var direction = targetPoint - transform.position;
 
-        var direction = targetPoint - startPoint;
-
-        var rotation = Quaternion.LookRotation(direction);
-        // вернули ориентацию обьекта в пространтсве
-
-        rotation.z = rotation.x;
-        rotation.y = 0f;
-        rotation.x = 0f;
-        
-        transform.rotation = rotation;
+        transform.up = direction;
     }
 }
