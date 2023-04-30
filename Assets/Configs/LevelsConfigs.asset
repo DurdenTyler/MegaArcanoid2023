@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levels:
   - SceneName: Level1
-    isCompleted: 0
+    isCompleted: 1
   - SceneName: Level2
     isCompleted: 0
   - SceneName: Level3
+    isCompleted: 0
+  - SceneName: Level4
     isCompleted: 0
